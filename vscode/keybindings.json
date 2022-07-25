@@ -1,0 +1,23 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+  {
+    "key": "ctrl+alt+c",
+    "command": "extension.changeCase.camel"
+  },
+  {
+    "key": "ctrl+alt+k",
+    "command": "extension.changeCase.kebab"
+  },
+  {
+    "key": "ctrl+alt+s",
+    "command": "extension.changeCase.snake"
+  },
+  {
+    "key": "ctrl+alt+v",
+    "command": "editor.emmet.action.balanceIn"
+  },
+  {
+    "key": "ctrl+alt+b",
+    "command": "editor.emmet.action.balanceOut"
+  }
+]

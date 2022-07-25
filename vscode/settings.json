@@ -1,0 +1,459 @@
+{
+  "gitlab.enableExperimentalFeatures": true,
+  "gitlab.instanceUrl": "https://gitlab.talkatoo.ai/",
+  "go.formatTool": "gofmt",
+  "markdown-preview-enhanced.previewTheme": "atom-dark.css",
+  "workbench.preferredHighContrastColorTheme": "Default Dark+",
+  "workbench.preferredLightColorTheme": "Default Dark+",
+  "editor.tabSize": 2,
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "git.enableSmartCommit": true,
+  "tailwindCSS.emmetCompletions": true,
+  "tailwindCSS.includeLanguages": {
+    "plaintext": "html",
+    "vue": "vue"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "vscode.typescript-language-features"
+  },
+  "liveshare.connectionMode": "relay",
+  "cSpell.userWords": [
+    "Bouldering",
+    "chargify",
+    "concat",
+    "curr",
+    "devs",
+    "gitlab",
+    "hubspot",
+    "mixpanel",
+    "mkdir",
+    "onfailure",
+    "redeclaring",
+    "rgba",
+    "Signup",
+    "Talkatoo",
+    "unshift",
+    "Vuex"
+  ],
+  "cSpell.enableFiletypes": [
+    "vue",
+    "go"
+  ],
+  "cSpell.enabledLanguageIds": [
+    "asciidoc",
+    "c",
+    "cpp",
+    "csharp",
+    "css",
+    "git-commit",
+    "go",
+    "graphql",
+    "handlebars",
+    "haskell",
+    "html",
+    "jade",
+    "java",
+    "javascript",
+    "javascriptreact",
+    "json",
+    "jsonc",
+    "latex",
+    "less",
+    "markdown",
+    "php",
+    "plaintext",
+    "python",
+    "pug",
+    "restructuredtext",
+    "rust",
+    "scala",
+    "scss",
+    "text",
+    "typescript",
+    "typescriptreact",
+    "yaml",
+    "yml",
+    "go"
+  ],
+  "editor.accessibilitySupport": "off",
+  "gitlens.hovers.currentLine.over": "line",
+  "gitlens.hovers.enabled": false,
+  "workbench.editor.highlightModifiedTabs": true,
+  "workbench.editor.pinnedTabSizing": "shrink",
+  "workbench.editor.wrapTabs": true,
+  "vetur.validation.templateProps": true,
+  "tailwindCSS.colorDecorators": true,
+  "editor.codeActionsOnSave": null,
+  "editor.autoClosingBrackets": "always",
+  "editor.autoClosingQuotes": "always",
+  "editor.formatOnSaveMode": "modifications",
+  "diffEditor.ignoreTrimWhitespace": false,
+  "diffEditor.maxComputationTime": 0,
+  "editor.minimap.showSlider": "always",
+  "editor.suggest.showStatusBar": true,
+  "files.trimTrailingWhitespace": true,
+  "html-css-class-completion.enableEmmetSupport": true,
+  "html.format.wrapAttributes": "auto",
+  "html.format.wrapLineLength": 0,
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "html.format.enable": false,
+  "vetur.format.defaultFormatterOptions": {
+    "prettier": {
+      "printWidth": 3000,
+    },
+    "js-beautify-html": {
+      "wrap_attributes": "force-expand-multiline"
+    },
+    "prettyhtml": {
+      "printWidth": 3000,
+      "singleQuote": false,
+      "wrapAttributes": false,
+      "sortAttributes": false,
+    }
+  },
+  "go.toolsManagement.autoUpdate": true,
+  "go.autocompleteUnimportedPackages": true,
+  "go.gopath": "C:/Users/Adam/repos/backend-services/",
+  "go.installDependenciesWhenBuilding": true,
+  "bracketPairColorizer.forceIterationColorCycle": false,
+  "security.workspace.trust.untrustedFiles": "open",
+  "formate.additionalSpaces": 1,
+  "formate.verticalAlignProperties": false,
+  "beautify.options": {},
+  "[css]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "vetur.format.defaultFormatter.js": "vscode-typescript",
+  "vetur.format.defaultFormatter.html": "none",
+  "files.associations": {
+    "*.css": "css"
+  },
+  "vetur.format.defaultFormatter.ts": "vscode-typescript",
+  "auto-comment-blocks.disabledLanguages": [],
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
+  "bracketPairColorizer.colorMode": "Independent",
+  "bracketPairColorizer.excludedLanguages": [
+    "*.html",
+    "*.vue"
+  ],
+  "bracketPairColorizer.colors": [
+    "Gold",
+    "Orchid",
+    "LightSkyBlue"
+  ],
+  "[csv]": {
+    "bracketLens.mode": "manual"
+  },
+  "svg.preview.mode": "img",
+  "files.exclude": {
+    ".git": true,
+    "**/.git": false
+  },
+  "editor.fontFamily": "'IBM Plex Mono', Consolas, 'Courier New', monospace",
+  "hexeditor.columnWidth": 32,
+  "hexeditor.showDecodedText": true,
+  "hexeditor.defaultEndianness": "little",
+  "hexeditor.inspectorType": "aside",
+  "git.autofetch": true,
+  "modaledit.keybindings": {
+    "i": "modaledit.enterInsert",
+    "I": [
+      "cursorHome",
+      "modaledit.enterInsert"
+    ],
+    "o": [
+      "editor.action.insertLineAfter",
+      "modaledit.enterInsert"
+    ],
+    "O": [
+      "editor.action.insertLineBefore",
+      "modaledit.enterInsert"
+    ],
+    "v": "modaledit.toggleSelection",
+    "V": "expandLineSelection",
+    "h": {
+      "command": "cursorMove",
+      "args": "{ to: 'left', select: __selecting }"
+    },
+    "H": {
+      "command": "cursorMove",
+      "args": "{ to: 'viewPortTop', select: __selecting }"
+    },
+    "j": {
+      "command": "cursorMove",
+      "args": "{ to: 'down', select: __selecting }"
+    },
+    "k": {
+      "command": "cursorMove",
+      "args": "{ to: 'up', select: __selecting }"
+    },
+    "l": {
+      "command": "cursorMove",
+      "args": "{ to: 'right', select: __selecting }"
+    },
+    "L": {
+      "command": "cursorMove",
+      "args": "{ to: 'viewPortBottom', select: __selecting }"
+    },
+    "M": {
+      "command": "cursorMove",
+      "args": "{ to: 'viewPortCenter', select: __selecting }"
+    },
+    "w": {
+      "condition": "__selecting",
+      "true": "cursorWordStartRightSelect",
+      "false": "cursorWordStartRight"
+    },
+    "b": {
+      "condition": "__selecting",
+      "true": "cursorWordStartLeftSelect",
+      "false": "cursorWordStartLeft"
+    },
+    "e": {
+      "condition": "__selecting",
+      "true": "cursorWordEndRightSelect",
+      "false": "cursorWordEndRight"
+    },
+    "0": {
+      "command": "cursorMove",
+      "args": "{ to: 'wrappedLineStart', select: __selecting }"
+    },
+    "^": {
+      "command": "cursorMove",
+      "args": "{ to: 'wrappedLineFirstNonWhitespaceCharacter', select: __selecting }"
+    },
+    "$": {
+      "command": "cursorMove",
+      "args": "{ to: 'wrappedLineEnd', select: __selecting }"
+    },
+    "g": {
+      "_": {
+        "command": "cursorMove",
+        "args": "{ to: 'wrappedLineLastNonWhitespaceCharacter', select: __selecting }"
+      },
+      "g": {
+        "condition": "__selecting",
+        "true": "cursorTopSelect",
+        "false": "cursorTop"
+      },
+    },
+    "G": {
+      "condition": "__selecting",
+      "true": "cursorBottomSelect",
+      "false": "cursorBottom"
+    },
+    "f": {
+      "condition": "__selecting",
+      "true": {
+        "command": "modaledit.search",
+        "args": {
+          "caseSensitive": true,
+          "acceptAfter": 1,
+          "selectTillMatch": true,
+        }
+      },
+      "false": {
+        "command": "modaledit.search",
+        "args": {
+          "caseSensitive": true,
+          "acceptAfter": 1,
+          "typeAfterAccept": "h",
+        }
+      },
+    },
+    "F": {
+      "condition": "__selecting",
+      "true": {
+        "command": "modaledit.search",
+        "args": {
+          "caseSensitive": true,
+          "acceptAfter": 1,
+          "selectTillMatch": true,
+          "backwards": true,
+        }
+      },
+      "false": {
+        "command": "modaledit.search",
+        "args": {
+          "caseSensitive": true,
+          "acceptAfter": 1,
+          "typeAfterAccept": "h",
+          "backwards": true
+        }
+      },
+    },
+    ";": "modaledit.nextMatch",
+    ",": "modaledit.previousMatch",
+    "z": {
+      "z": {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      }
+    },
+    "u": [
+      {
+        "command": "cursorPageUp",
+        "when": "editorTextFocus && modaledit.normal"
+      },
+      {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      }
+    ],
+    "d": [
+      {
+        "command": "cursorPageDown",
+        "when": "editorTextFocus && modaledit.normal"
+      },
+      {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      }
+    ],
+    "1-9": {
+      "id": 1,
+      "help": "Enter count followed by [h,j,k,l,w,b,e]",
+      "0-9": 1,
+      "h,j,k,l,w,b,e": {
+        "command": "modaledit.typeNormalKeys",
+        "args": "{ keys: __keys[__keys.length - 1] }",
+        "repeat": "Number(__keys.slice(0, -1).join(''))"
+      },
+      "G": [
+        {
+          "command": "revealLine",
+          "args": "{ lineNumber: Number(__keys.slice(0, -1).join('')) - 1, at: 'top' }"
+        },
+        {
+          "command": "cursorMove",
+          "args": {
+            "to": "viewPortTop"
+          }
+        },
+        {
+          "command": "revealLine",
+          "args": "{ lineNumber: __line, at: 'center' }"
+        }
+      ]
+    },
+    "J": "editor.action.joinLines",
+    "C": [
+      "deleteAllRight",
+      "modaledit.enterInsert"
+    ],
+    "c": {
+      "c": [
+        "deleteAllLeft",
+        "deleteAllRight",
+        "modaledit.enterInsert"
+      ],
+      "$": [
+        "deleteAllRight",
+        "modaledit.enterInsert"
+      ],
+      "w": [
+        "deleteWordEndRight",
+        "modaledit.enterInsert"
+      ],
+      "t,f": {
+        "help": "Change until _",
+        " -~": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ to: __keys[2], inclusive: __keys[1] == 'f' }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ]
+      },
+      "a,i": {
+        "help": "Change around/inside _",
+        " -/,:-@,[-`,{-~": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: __keys[2], to: __keys[2], inclusive: __keys[1] == 'a' }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+      },
+      "(,)": [
+        {
+          "command": "modaledit.selectBetween",
+          "args": "{ from: '(', to: ')', inclusive: __keys[1] == 'a' }"
+        },
+        "deleteLeft",
+        "modaledit.enterInsert"
+      ],
+      "{,}": [
+        {
+          "command": "modaledit.selectBetween",
+          "args": "{ from: '{', to: '}', inclusive: __keys[1] == 'a' }"
+        },
+        "deleteLeft",
+        "modaledit.enterInsert"
+      ],
+      "[,]": [
+        {
+          "command": "modaledit.selectBetween",
+          "args": "{ from: '[', to: ']', inclusive: __keys[1] == 'a' }"
+        },
+        "deleteLeft",
+        "modaledit.enterInsert"
+      ],
+      "<,>": [
+        {
+          "command": "modaledit.selectBetween",
+          "args": "{ from: '<', to: '>', inclusive: __keys[1] == 'a' }"
+        },
+        "deleteLeft",
+        "modaledit.enterInsert"
+      ],
+    },
+    "s": [
+      "deleteRight",
+      "modaledit.enterInsert"
+    ],
+    "S": [
+      "deleteAllLeft",
+      "deleteAllRight",
+      "modaledit.enterInsert"
+    ],
+    "~": {
+      "condition": "__selection == __selection.toUpperCase()",
+      "true": "editor.action.transformToLowercase",
+      "false": "editor.action.transformToUppercase"
+    },
+    "m": {
+      "a-z": {
+        "command": "modaledit.defineBookmark",
+        "args": "{ bookmark: __keys[1] }"
+      }
+    },
+    "`": {
+      "a-z": {
+        "command": "modaledit.goToBookmark",
+        "args": "{ bookmark: __keys[1] }"
+      }
+    },
+    "/": {
+      "command": "modaledit.search",
+      "args": {
+        "caseSensitive": true
+      }
+    },
+    "?": {
+      "command": "modaledit.search",
+      "args": {
+        "caseSensitive": true,
+        "backwards": true
+      }
+    },
+    "n": "modaledit.nextMatch",
+    "N": "modaledit.previousMatch",
+  },
+}
