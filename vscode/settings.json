@@ -24,20 +24,25 @@
     "curr",
     "devs",
     "gitlab",
+    "gpio",
     "hubspot",
     "mixpanel",
     "mkdir",
     "onfailure",
+    "protoc",
     "redeclaring",
     "rgba",
+    "rustfmt",
     "Signup",
     "Talkatoo",
     "unshift",
     "Vuex"
   ],
   "cSpell.enableFiletypes": [
-    "vue",
-    "go"
+    "go",
+    "markdown",
+    "proto3",
+    "vue"
   ],
   "cSpell.enabledLanguageIds": [
     "asciidoc",
@@ -80,7 +85,6 @@
   "gitlens.hovers.enabled": false,
   "workbench.editor.highlightModifiedTabs": true,
   "workbench.editor.pinnedTabSizing": "shrink",
-  "workbench.editor.wrapTabs": true,
   "vetur.validation.templateProps": true,
   "tailwindCSS.colorDecorators": true,
   "editor.codeActionsOnSave": null,
@@ -96,7 +100,7 @@
   "html.format.wrapAttributes": "auto",
   "html.format.wrapLineLength": 0,
   "[vue]": {
-    "editor.defaultFormatter": "octref.vetur"
+    "editor.defaultFormatter": "Vue.volar"
   },
   "html.format.enable": false,
   "vetur.format.defaultFormatterOptions": {
@@ -115,7 +119,6 @@
   },
   "go.toolsManagement.autoUpdate": true,
   "go.autocompleteUnimportedPackages": true,
-  "go.gopath": "C:/Users/Adam/repos/backend-services/",
   "go.installDependenciesWhenBuilding": true,
   "bracketPairColorizer.forceIterationColorCycle": false,
   "security.workspace.trust.untrustedFiles": "open",
@@ -161,8 +164,20 @@
   "git.autofetch": true,
   "modaledit.keybindings": {
     "i": "modaledit.enterInsert",
+    ".": "modaledit.enterInsert",
     "I": [
       "cursorHome",
+      "modaledit.enterInsert"
+    ],
+    "a": [
+      {
+        "condition": "__char == ''",
+        "false": "cursorRight"
+      },
+      "modaledit.enterInsert"
+    ],
+    "A": [
+      "cursorEnd",
       "modaledit.enterInsert"
     ],
     "o": [
@@ -179,7 +194,7 @@
       "command": "cursorMove",
       "args": "{ to: 'left', select: __selecting }"
     },
-    "H": {
+    "K": {
       "command": "cursorMove",
       "args": "{ to: 'viewPortTop', select: __selecting }"
     },
@@ -195,7 +210,7 @@
       "command": "cursorMove",
       "args": "{ to: 'right', select: __selecting }"
     },
-    "L": {
+    "J": {
       "command": "cursorMove",
       "args": "{ to: 'viewPortBottom', select: __selecting }"
     },
@@ -208,10 +223,18 @@
       "true": "cursorWordStartRightSelect",
       "false": "cursorWordStartRight"
     },
+    "W": {
+      "command": "cursorWordStartRight",
+      "repeat": "__char.match(/\\W/)"
+    },
     "b": {
       "condition": "__selecting",
       "true": "cursorWordStartLeftSelect",
       "false": "cursorWordStartLeft"
+    },
+    "B": {
+      "command": "cursorWordStartLeft",
+      "repeat": "__char.match(/\\W/)"
     },
     "e": {
       "condition": "__selecting",
@@ -222,6 +245,11 @@
       "command": "cursorMove",
       "args": "{ to: 'wrappedLineStart', select: __selecting }"
     },
+    "%": {
+      "condition": "__selecting",
+      "true": "editor.action.smartSelect.expand",
+      "false": "editor.action.jumpToBracket"
+    },
     "^": {
       "command": "cursorMove",
       "args": "{ to: 'wrappedLineFirstNonWhitespaceCharacter', select: __selecting }"
@@ -230,6 +258,26 @@
       "command": "cursorMove",
       "args": "{ to: 'wrappedLineEnd', select: __selecting }"
     },
+    "+": [
+      {
+        "command": "cursorMove",
+        "args": "{ to: 'down', select: __selecting }"
+      },
+      {
+        "command": "cursorMove",
+        "args": "{ to: 'wrappedLineFirstNonWhitespaceCharacter', select: __selecting }"
+      }
+    ],
+    "-": [
+      {
+        "command": "cursorMove",
+        "args": "{ to: 'up', select: __selecting }"
+      },
+      {
+        "command": "cursorMove",
+        "args": "{ to: 'wrappedLineFirstNonWhitespaceCharacter', select: __selecting }"
+      }
+    ],
     "g": {
       "_": {
         "command": "cursorMove",
@@ -240,6 +288,8 @@
         "true": "cursorTopSelect",
         "false": "cursorTop"
       },
+      "t": "workbench.action.nextEditor",
+      "T": "workbench.action.previousEditor"
     },
     "G": {
       "condition": "__selecting",
@@ -251,7 +301,7 @@
       "true": {
         "command": "modaledit.search",
         "args": {
-          "caseSensitive": true,
+          "caseSensitife": true,
           "acceptAfter": 1,
           "selectTillMatch": true,
         }
@@ -272,7 +322,7 @@
         "args": {
           "caseSensitive": true,
           "acceptAfter": 1,
-          "selectTillMatch": true,
+          // "selectTillMatch": true,
           "backwards": true,
         }
       },
@@ -296,6 +346,25 @@
     },
     "u": [
       {
+        "command": "cursorMove",
+        "args": "{ to: 'viewPortCenter', select: __selecting }"
+      },
+      {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      },
+      {
+        "command": "cursorMove",
+        "args": "{ to: 'viewPortTop', select: __selecting }",
+        "when": "editorTextFocus && modaledit.normal"
+      },
+      {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      }
+    ],
+    "U": [
+      {
         "command": "cursorPageUp",
         "when": "editorTextFocus && modaledit.normal"
       },
@@ -306,6 +375,25 @@
     ],
     "d": [
       {
+        "command": "cursorMove",
+        "args": "{ to: 'viewPortCenter', select: __selecting }"
+      },
+      {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      },
+      {
+        "command": "cursorMove",
+        "args": "{ to: 'viewPortBottom', select: __selecting }",
+        "when": "editorTextFocus && modaledit.normal"
+      },
+      {
+        "command": "revealLine",
+        "args": "{ lineNumber: __line, at: 'center' }"
+      }
+    ],
+    "D": [
+      {
         "command": "cursorPageDown",
         "when": "editorTextFocus && modaledit.normal"
       },
@@ -314,14 +402,41 @@
         "args": "{ lineNumber: __line, at: 'center' }"
       }
     ],
+    ":": {
+      ":": {},
+      "id": 1,
+      "help": "Enter a line number",
+      "0-9": 1,
+      ":,`": [
+        {
+          "command": "revealLine",
+          "args": "{ lineNumber: Number(__keys.slice(1, -1).join('')) - 1, at: 'top' }"
+        },
+        {
+          "command": "cursorMove",
+          "args": {
+            "to": "viewPortTop"
+          }
+        },
+        {
+          "command": "revealLine",
+          "args": "{ lineNumber: __line, at: 'center' }"
+        }
+      ]
+    },
     "1-9": {
       "id": 1,
-      "help": "Enter count followed by [h,j,k,l,w,b,e]",
+      "help": "Enter count followed by [h,j,k,l,w,b,e,V]",
       "0-9": 1,
       "h,j,k,l,w,b,e": {
         "command": "modaledit.typeNormalKeys",
         "args": "{ keys: __keys[__keys.length - 1] }",
         "repeat": "Number(__keys.slice(0, -1).join(''))"
+      },
+      "V": {
+        "command": "modaledit.typeNormalKeys",
+        "args": "{ keys: __keys[__keys.length - 1] }",
+        "repeat": "Number(__keys.slice(0, -1).join('')) + 1"
       },
       "G": [
         {
@@ -340,7 +455,6 @@
         }
       ]
     },
-    "J": "editor.action.joinLines",
     "C": [
       "deleteAllRight",
       "modaledit.enterInsert"
@@ -364,7 +478,7 @@
         " -~": [
           {
             "command": "modaledit.selectBetween",
-            "args": "{ to: __keys[2], inclusive: __keys[1] == 'f' }"
+            "args": "{ to: __keys[2], inclusive: __keys[1] == 'f', docScope: true }"
           },
           "deleteLeft",
           "modaledit.enterInsert"
@@ -375,44 +489,60 @@
         " -/,:-@,[-`,{-~": [
           {
             "command": "modaledit.selectBetween",
-            "args": "{ from: __keys[2], to: __keys[2], inclusive: __keys[1] == 'a' }"
+            "args": "{ from: __keys[2], to: __keys[2], inclusive: __keys[1] == 'a', docScope: true }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+        "(,)": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: '(', to: ')', inclusive: __keys[1] == 'a',docScope: true }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+        "{,}": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: '{', to: '}', inclusive: __keys[1] == 'a',docScope: true }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+        "[,]": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: '[', to: ']', inclusive: __keys[1] == 'a',docScope: true }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+        "<,>": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: '<', to: '>', inclusive: __keys[1] == 'a',docScope: true }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+        "w": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: '\\\\W', to: '\\\\W', regex: true, inclusive: __keys[1] == 'a',docScope: true }"
+          },
+          "deleteLeft",
+          "modaledit.enterInsert"
+        ],
+        "W": [
+          {
+            "command": "modaledit.selectBetween",
+            "args": "{ from: ' ', to: ' ', regex: true, inclusive: __keys[1] == 'a'}"
           },
           "deleteLeft",
           "modaledit.enterInsert"
         ],
       },
-      "(,)": [
-        {
-          "command": "modaledit.selectBetween",
-          "args": "{ from: '(', to: ')', inclusive: __keys[1] == 'a' }"
-        },
-        "deleteLeft",
-        "modaledit.enterInsert"
-      ],
-      "{,}": [
-        {
-          "command": "modaledit.selectBetween",
-          "args": "{ from: '{', to: '}', inclusive: __keys[1] == 'a' }"
-        },
-        "deleteLeft",
-        "modaledit.enterInsert"
-      ],
-      "[,]": [
-        {
-          "command": "modaledit.selectBetween",
-          "args": "{ from: '[', to: ']', inclusive: __keys[1] == 'a' }"
-        },
-        "deleteLeft",
-        "modaledit.enterInsert"
-      ],
-      "<,>": [
-        {
-          "command": "modaledit.selectBetween",
-          "args": "{ from: '<', to: '>', inclusive: __keys[1] == 'a' }"
-        },
-        "deleteLeft",
-        "modaledit.enterInsert"
-      ],
     },
     "s": [
       "deleteRight",
@@ -429,16 +559,22 @@
       "false": "editor.action.transformToUppercase"
     },
     "m": {
-      "a-z": {
+      "a-z,1-9": {
         "command": "modaledit.defineBookmark",
         "args": "{ bookmark: __keys[1] }"
       }
     },
     "`": {
-      "a-z": {
-        "command": "modaledit.goToBookmark",
-        "args": "{ bookmark: __keys[1] }"
-      }
+      "a-z,1-9": [
+        {
+          "command": "modaledit.goToBookmark",
+          "args": "{ bookmark: __keys[1] }"
+        },
+        {
+          "command": "revealLine",
+          "args": "{ lineNumber: __line, at: 'center' }"
+        }
+      ]
     },
     "/": {
       "command": "modaledit.search",
@@ -455,5 +591,80 @@
     },
     "n": "modaledit.nextMatch",
     "N": "modaledit.previousMatch",
+    "x": "deleteRight",
+    "X": "deleteLeft",
+    "r,s": [
+      "deleteRight",
+      "modaledit.enterInsert"
+    ],
+    "S": {
+      "command": "modaledit.typeNormalKeys",
+      "args": {
+        "keys": "cc"
+      }
+    },
   },
+  "editor.lineNumbers": "relative",
+  "search.showLineNumbers": true,
+  "editor.glyphMargin": false,
+  "git.mergeEditor": false,
+  "workbench.colorTheme": "Gruvbox Dark (Hard)",
+  "debug.allowBreakpointsEverywhere": true,
+  "better-comments.tags": [
+    {
+      "tag": "!",
+      "color": "#FF2D00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "?",
+      "color": "#3498DB",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "//",
+      "color": "#474747",
+      "strikethrough": true,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "todo",
+      "color": "#FF8C00",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": "*",
+      "color": "#98C379",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": false
+    },
+    {
+      "tag": ">",
+      "color": "#D3869B",
+      "strikethrough": false,
+      "underline": false,
+      "backgroundColor": "transparent",
+      "bold": false,
+      "italic": true
+    },
+  ],
+  "window.zoomLevel": 1
 }
