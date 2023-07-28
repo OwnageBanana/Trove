@@ -46,17 +46,14 @@ require('packer').startup(function(use)
   -- ??
   use('theprimeagen/harpoon')
   use('mbbill/undotree')
-  
   use('wfxr/minimap.vim')
- 
-  
   -- Git related plugins
   use 'tpope/vim-fugitive'
   use 'tpope/vim-rhubarb'
   use 'lewis6991/gitsigns.nvim'
 
   --use 'navarasu/onedark.nvim' -- Theme inspired by Atom
-  use  'ellisonleao/gruvbox.nvim' 
+  use  'ellisonleao/gruvbox.nvim'
   use 'rebelot/kanagawa.nvim'
 
   use 'nvim-lualine/lualine.nvim' -- Fancier statusline
@@ -110,8 +107,10 @@ vim.api.nvim_create_autocmd('BufWritePost', {
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.o.hlsearch = false
+vim.opt.hlsearch = true
 vim.opt.incsearch = true
+-- removes search highlighting
+vim.keymap.set({ 'n' }, '<C-L>', vim.cmd.noh)
 
 -- Make line numbers default
 vim.wo.number = true
@@ -157,7 +156,7 @@ vim.o.completeopt = 'menuone,noselect'
 
 -- [[ Basic Keymaps ]]
 -- Set <space> as the leader key
--- See `:help mapleader`
+-- See `:help mapleade`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
 vim.g.maplocalleader = ' '
@@ -166,6 +165,7 @@ vim.g.maplocalleader = ' '
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>pv', vim.cmd.Ex)
+
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -194,6 +194,14 @@ vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", ":Q", ":q")
 vim.keymap.set("n", ":Wq", ":wq")
 vim.keymap.set("n", ":WQ", ":wq")
+
+vim.keymap.set("n", "<leader>o", "o<Esc>")
+vim.keymap.set("n", "<leader>O", "O<Esc>")
+
+vim.keymap.set("n", ":dts", ":read !echo $(date '+\\%Y/\\%m/\\%d \\%H:\\%M:\\%S|\\%a|')  <CR>A<Space>")
+
+
+
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -483,6 +491,7 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
+    { name = 'nvim_lsp_signature_help' },
   },
 }
 -- The line beneath this is called `modeline`. See `:help modeline`
