@@ -1,18 +1,24 @@
--- Install packer
-local install_path = vim.fn.stdpath 'data' .. '/site/pack/packer/start/packer.nvim'
-local is_bootstrap = false
-if vim.fn.empty(vim.fn.glob(install_path)) > 0 then
-  is_bootstrap = true
-  vim.fn.system { 'git', 'clone', '--depth', '1', 'https://github.com/wbthomason/packer.nvim', install_path }
-  vim.cmd [[packadd packer.nvim]]
-end
+-- Set <space> as the leader key
+-- See `:help mapleader`
+--  NOTE: Must happen before lazy.nvim loads (otherwise wrong leader will be used)
+vim.g.mapleader = ' '
+vim.g.maplocalleader = ' '
 
-require('packer').startup(function(use)
-  -- Package manager
-  use 'wbthomason/packer.nvim'
-  use { -- LSP Configuration & Plugins
+-- [[ Install lazy.nvim ]]
+-- See `:help lazy.nvim.txt` or https://github.com/folke/lazy.nvim
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not (vim.uv or vim.loop).fs_stat(lazypath) then
+  vim.fn.system { 'git', 'clone', '--filter=blob:none', '--branch=stable',
+    'https://github.com/folke/lazy.nvim.git', lazypath }
+end
+vim.opt.rtp:prepend(lazypath)
+
+-- [[ Plugins ]]
+-- :Lazy opens the manager (U = update, X = clean, S = sync)
+require('lazy').setup({
+  { -- LSP Configuration & Plugins
     'neovim/nvim-lspconfig',
-    requires = {
+    dependencies = {
       -- Automatically install LSPs to stdpath for neovim
       'williamboman/mason.nvim',
       'williamboman/mason-lspconfig.nvim',
@@ -23,91 +29,60 @@ require('packer').startup(function(use)
       -- Additional lua configuration, makes nvim stuff amazing
       'folke/neodev.nvim',
     },
-  }
+  },
 
-  use { -- Autocompletion
+  { -- Autocompletion
     'hrsh7th/nvim-cmp',
-    requires = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
-  }
+    dependencies = { 'hrsh7th/cmp-nvim-lsp', 'L3MON4D3/LuaSnip', 'saadparwaiz1/cmp_luasnip' },
+  },
 
-  use { -- Highlight, edit, and navigate code
+  { -- Highlight, edit, and navigate code
+    -- Pinned to master: upstream's default branch is now `main`, a rewrite
+    -- without `nvim-treesitter.configs`, which this config uses
     'nvim-treesitter/nvim-treesitter',
-    run = function()
-      pcall(require('nvim-treesitter.install').update { with_sync = true })
-    end,
-  }
-  use('nvim-treesitter/playground')
+    branch = 'master',
+    build = ':TSUpdate',
+  },
+  'nvim-treesitter/playground',
 
-  use { -- Additional text objects via treesitter
+  { -- Additional text objects via treesitter (also pinned to master, see above)
     'nvim-treesitter/nvim-treesitter-textobjects',
-    after = 'nvim-treesitter',
-  }
-  use('mbbill/undotree')
+    branch = 'master',
+    dependencies = 'nvim-treesitter/nvim-treesitter',
+  },
+  'mbbill/undotree',
 
   -- Git related plugins
-  use 'tpope/vim-fugitive'
-  use 'tpope/vim-rhubarb'
-  use 'lewis6991/gitsigns.nvim'
+  'tpope/vim-fugitive',
+  'tpope/vim-rhubarb',
+  'lewis6991/gitsigns.nvim',
 
-  --use 'navarasu/onedark.nvim' -- Theme inspired by Atom
-  use  'ellisonleao/gruvbox.nvim'
-  use 'rebelot/kanagawa.nvim'
+  --'navarasu/onedark.nvim', -- Theme inspired by Atom
+  'ellisonleao/gruvbox.nvim',
+  'rebelot/kanagawa.nvim',
 
-  use 'nvim-lualine/lualine.nvim' -- Fancier statusline
-  use 'lukas-reineke/indent-blankline.nvim' -- Add indentation guides even on blank lines
-  use 'numToStr/Comment.nvim' -- "gc" to comment visual regions/lines
-  use 'tpope/vim-sleuth' -- Detect tabstop and shiftwidth automatically
+  'nvim-lualine/lualine.nvim', -- Fancier statusline
+  'lukas-reineke/indent-blankline.nvim', -- Add indentation guides even on blank lines
+  'numToStr/Comment.nvim', -- "gc" to comment visual regions/lines
+  'tpope/vim-sleuth', -- Detect tabstop and shiftwidth automatically
 
   -- Fuzzy Finder (files, lsp, etc)
-  use { 'nvim-telescope/telescope.nvim', branch = '0.1.x', requires = { 'nvim-lua/plenary.nvim' } }
+  { 'nvim-telescope/telescope.nvim', branch = '0.1.x', dependencies = { 'nvim-lua/plenary.nvim' } },
 
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
-  use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
+  { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make', cond = vim.fn.executable 'make' == 1 },
 
-  -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
-  local has_plugins, plugins = pcall(require, 'custom.plugins')
-  if has_plugins then
-    plugins(use)
-  end
-
-  if is_bootstrap then
-    require('packer').sync()
-  end
-end)
-
---use 'lervag/vimtex' -- LaTeX plugin for compiling tex files
-
-
-
--- When we are bootstrapping a configuration, it doesn't
--- make sense to execute the rest of the init.lua.
---
--- You'll need to restart nvim, and then it will work.
-if is_bootstrap then
-  print '=================================='
-  print '    Plugins are being installed'
-  print '    Wait until Packer completes,'
-  print '       then restart nvim'
-  print '=================================='
-  return
-end
-
--- Automatically source and re-compile packer whenever you save this init.lua
-local packer_group = vim.api.nvim_create_augroup('Packer', { clear = true })
-vim.api.nvim_create_autocmd('BufWritePost', {
-  command = 'source <afile> | PackerCompile',
-  group = packer_group,
-  pattern = vim.fn.expand '$MYVIMRC',
+  --'lervag/vimtex', -- LaTeX plugin for compiling tex files
+}, {
+  install = { colorscheme = { 'kanagawa-wave' } },
 })
 
 -- [[ Setting options ]]
 -- See `:help vim.o`
 
 -- Set highlight on search
-vim.opt.hlsearch = true
+vim.o.hlsearch = false
 vim.opt.incsearch = true
--- removes search highlighting
-vim.keymap.set({ 'n' }, '<C-L>', vim.cmd.noh)
 
 -- Make line numbers default
 vim.wo.number = true
@@ -152,17 +127,11 @@ vim.cmd([[colorscheme kanagawa-wave]])
 vim.o.completeopt = 'menuone,noselect'
 
 -- [[ Basic Keymaps ]]
--- Set <space> as the leader key
--- See `:help mapleade`
---  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
-vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
 vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set({ 'n' }, '<leader>pv', vim.cmd.Ex)
-
 
 -- Remap for dealing with word wrap
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
@@ -191,14 +160,6 @@ vim.keymap.set("n", "<leader>X", "<cmd>!chmod +x %<CR>", { silent = true })
 vim.keymap.set("n", ":Q", ":q")
 vim.keymap.set("n", ":Wq", ":wq")
 vim.keymap.set("n", ":WQ", ":wq")
-
-vim.keymap.set("n", "<leader>o", "o<Esc>")
-vim.keymap.set("n", "<leader>O", "O<Esc>")
-
-vim.keymap.set("n", ":dts", ":read !echo $(date '+\\%Y/\\%m/\\%d \\%H:\\%M:\\%S|\\%a|')  <CR>A<Space>")
-
-
-
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -256,6 +217,18 @@ require('telescope').setup {
         ['<C-u>'] = false,
         ['<C-d>'] = false,
       },
+    },
+    -- Grep pickers (<leader>sg, <leader>sw): always case-insensitive
+    -- (default is --smart-case, which turns case-sensitive if you type a capital)
+    vimgrep_arguments = {
+      'rg', '--color=never', '--no-heading', '--with-filename',
+      '--line-number', '--column', '--ignore-case',
+    },
+  },
+  extensions = {
+    -- Fuzzy pickers (files, buffers, <leader>/ ...): always case-insensitive
+    fzf = {
+      case_mode = 'ignore_case',
     },
   },
 }
@@ -491,7 +464,6 @@ cmp.setup {
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
-    { name = 'nvim_lsp_signature_help' },
   },
 }
 -- The line beneath this is called `modeline`. See `:help modeline`
